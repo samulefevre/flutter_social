@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_social/view/my_material.dart';
 
 class FireHelper {
   //Auth
@@ -22,12 +23,12 @@ class FireHelper {
     List<dynamic> followers = [];
     List<dynamic> following = [uid];
     Map<String, dynamic> map = {
-      "name": name,
-      "surname": surname,
-      "name": name,
-      "imageUrl": "",
-      "followers": followers,
-      "following": following,
+      keyName: name,
+      keySurname: surname,
+      keyImageUrl: "",
+      keyFollowers: followers,
+      keyFollowing: following,
+      keyUid: uid
     };
     addUser(uid, map);
     return user;
