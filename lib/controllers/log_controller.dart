@@ -6,6 +6,24 @@ class LogController extends StatefulWidget {
 }
 
 class _LogState extends State<LogController> {
+
+  PageController _pageController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController= PageController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pageController.dispose();
+    super.dispose();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +43,7 @@ class _LogState extends State<LogController> {
                 child: Column(
                   children: <Widget>[
                     PaddingWith(widget: Image(image: logoImage, height: 100.0)),
+                    PaddingWith(widget: MenuTwoItems(item1: "Connexion", item2: "Création", pageController: _pageController), top: 20.0,),
                   ],
                 ),
               )),
