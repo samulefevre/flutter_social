@@ -7,12 +7,17 @@ class FireHelper {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<FirebaseUser> signIn(String mail, String pwd) async {
-    final FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: mail, password: pwd)).user;
+    final FirebaseUser user =
+        (await _auth.signInWithEmailAndPassword(email: mail, password: pwd))
+            .user;
     return user;
   }
 
-  Future<FirebaseUser> createAccount(String mail, String pwd, String name, String surname) async {
-    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(email: mail, password: pwd)).user;
+  Future<FirebaseUser> createAccount(
+      String mail, String pwd, String name, String surname) async {
+    final FirebaseUser user =
+        (await _auth.createUserWithEmailAndPassword(email: mail, password: pwd))
+            .user;
     String uid = user.uid;
     List<dynamic> followers = [];
     List<dynamic> following = [uid];
@@ -20,7 +25,7 @@ class FireHelper {
       "name": name,
       "surname": surname,
       "name": name,
-      "imageUrl" : "",
+      "imageUrl": "",
       "followers": followers,
       "following": following,
     };
