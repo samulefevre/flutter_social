@@ -6,14 +6,13 @@ class LogController extends StatefulWidget {
 }
 
 class _LogState extends State<LogController> {
-
   PageController _pageController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pageController= PageController();
+    _pageController = PageController();
   }
 
   @override
@@ -21,7 +20,6 @@ class _LogState extends State<LogController> {
     // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
-
   }
 
   @override
@@ -43,12 +41,32 @@ class _LogState extends State<LogController> {
                 child: Column(
                   children: <Widget>[
                     PaddingWith(widget: Image(image: logoImage, height: 100.0)),
-                    PaddingWith(widget: MenuTwoItems(item1: "Connexion", item2: "Création", pageController: _pageController), top: 20.0,),
+                    PaddingWith(
+                      widget: MenuTwoItems(
+                          item1: "Connexion",
+                          item2: "Création",
+                          pageController: _pageController),
+                      top: 20.0,
+                      bottom: 20.0,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: PageView(
+                        controller: _pageController,
+                        children: <Widget>[logView(0), logView(1)],
+                      ),
+                    )
                   ],
                 ),
               )),
         ),
       ),
+    );
+  }
+
+  Widget logView(int index) {
+    return Container(
+      color: (index == 0) ? pointer : white,
     );
   }
 }
