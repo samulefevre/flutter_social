@@ -6,7 +6,6 @@ class LogController extends StatefulWidget {
 }
 
 class _LogState extends State<LogController> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +16,18 @@ class _LogState extends State<LogController> {
         },
         child: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: (MediaQuery.of(context).size.height >= 650.0) ?MediaQuery.of(context).size.height : 650.0,
-            decoration: Mygradient(startColor: base, endColor: baseAccent),
-          ),
+              width: MediaQuery.of(context).size.width,
+              height: (MediaQuery.of(context).size.height >= 650.0)
+                  ? MediaQuery.of(context).size.height
+                  : 650.0,
+              decoration: Mygradient(startColor: base, endColor: baseAccent),
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(top: 10.0)),
+                    Image(image: logoImage, height: 100.0,)],
+                ),
+              )),
         ),
       ),
     );
