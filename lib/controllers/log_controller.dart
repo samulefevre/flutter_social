@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_social/view/my_material.dart';
 import 'package:flutter_social/util/alert_helper.dart';
+import 'package:flutter_social/util/fire_helper.dart';
 
 class LogController extends StatefulWidget {
   _LogState createState() => _LogState();
@@ -162,12 +163,12 @@ class _LogState extends State<LogController> {
       if (_pwd.text != null && _pwd.text != "") {
         if (exists) {
           //logIn
-          AlertHelper().error(context, "Tout est OK");
+          FireHelper().signIn(_mail.text, _pwd.text);
         } else {
           if (_name.text != null && _name.text != "") {
             if (_surname.text != null && _surname.text != "") {
               //signIn
-              AlertHelper().error(context, "Tout est OK");
+              FireHelper().createAccount(_mail.text, _pwd.text, _name.text, _surname.text);
             } else {
               AlertHelper().error(context, "Aucune prénom");
             }
