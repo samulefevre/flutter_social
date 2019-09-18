@@ -24,8 +24,8 @@ class _LogState extends State<LogController> {
               child: SafeArea(
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top: 10.0)),
-                    Image(image: logoImage, height: 100.0,)],
+                    PaddingWith(widget: Image(image: logoImage, height: 100.0)),
+                  ],
                 ),
               )),
         ),
