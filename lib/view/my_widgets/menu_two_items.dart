@@ -7,9 +7,9 @@ class MenuTwoItems extends StatelessWidget {
   final PageController pageController;
 
   MenuTwoItems(
-      {@required String this.item1,
-      @required String this.item2,
-      @required PageController this.pageController});
+      {@required this.item1,
+      @required this.item2,
+      @required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,12 @@ class MenuTwoItems extends StatelessWidget {
       decoration: BoxDecoration(
           color: pointer,
           borderRadius: BorderRadius.all(Radius.circular(25.0))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[itemButton(item1), itemButton(item2)],
+      child: CustomPaint(
+        painter: MyPainter(pageController),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[itemButton(item1), itemButton(item2)],
+        ),
       ),
     );
   }
