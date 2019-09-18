@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_social/view/my_material.dart';
+import 'package:flutter_social/util/alert_helper.dart';
 
 class LogController extends StatefulWidget {
   _LogState createState() => _LogState();
@@ -151,24 +152,34 @@ class _LogState extends State<LogController> {
     return list;
   }
 
+  hideKeyboard() {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   signIn(bool exists) {
     hideKeyboard();
     if (_mail.text != null && _mail.text != "") {
       if (_pwd.text != null && _pwd.text != "") {
         if (exists) {
           //logIn
+          AlertHelper().error(context, "Tout est OK");
+        } else {
           if (_name.text != null && _name.text != "") {
             if (_surname.text != null && _surname.text != "") {
               //signIn
-
-            } else {}
-          } else {}
-        } else {}
-      } else {}
-    } else {}
-  }
-
-  hideKeyboard() {
-    FocusScope.of(context).requestFocus(FocusNode());
+              AlertHelper().error(context, "Tout est OK");
+            } else {
+              AlertHelper().error(context, "Aucune prénom");
+            }
+          } else {
+            AlertHelper().error(context, "Aucun nom");
+          }
+        }
+      } else {
+        AlertHelper().error(context, "Aucun mot de passe");
+      }
+    } else {
+      AlertHelper().error(context, "Aucune adresse mail");
+    }
   }
 }
