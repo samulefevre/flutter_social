@@ -70,7 +70,7 @@ class _LogState extends State<LogController> {
                   ],
                 ),
               )),
-          onTap: (() => FocusScope.of(context).requestFocus(FocusNode())),
+          onTap: (() => hideKeyboard()),
         )),
       ),
     );
@@ -111,7 +111,9 @@ class _LogState extends State<LogController> {
                   radius: 25.0,
                   horizontal: true),
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  signIn((index == 0));
+                },
                 child:
                     MyText((index == 0) ? "Se connecter" : "Créer un compte"),
               ),
@@ -147,5 +149,26 @@ class _LogState extends State<LogController> {
       obscure: true,
     ));
     return list;
+  }
+
+  signIn(bool exists) {
+    hideKeyboard();
+    if (_mail.text != null && _mail.text != "") {
+      if (_pwd.text != null && _pwd.text != "") {
+        if (exists) {
+          //logIn
+          if (_name.text != null && _name.text != "") {
+            if (_surname.text != null && _surname.text != "") {
+              //signIn
+
+            } else {}
+          } else {}
+        } else {}
+      } else {}
+    } else {}
+  }
+
+  hideKeyboard() {
+    FocusScope.of(context).requestFocus(FocusNode());
   }
 }
