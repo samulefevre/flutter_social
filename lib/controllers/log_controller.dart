@@ -41,6 +41,7 @@ class _LogState extends State<LogController> {
           return false;
         },
         child: SingleChildScrollView(
+            child: InkWell(
           child: Container(
               width: MediaQuery.of(context).size.width,
               height: (MediaQuery.of(context).size.height >= 650.0)
@@ -69,7 +70,8 @@ class _LogState extends State<LogController> {
                   ],
                 ),
               )),
-        ),
+          onTap: (() => FocusScope.of(context).requestFocus(FocusNode())),
+        )),
       ),
     );
   }
@@ -110,7 +112,8 @@ class _LogState extends State<LogController> {
                   horizontal: true),
               child: FlatButton(
                 onPressed: () {},
-                child: Text((index == 0) ? "Se connecter" : "Créer un compte"),
+                child:
+                    MyText((index == 0) ? "Se connecter" : "Créer un compte"),
               ),
             ),
           ),
