@@ -4,6 +4,8 @@ import 'package:flutter_social/util/alert_helper.dart';
 import 'package:flutter_social/util/fire_helper.dart';
 
 class LogController extends StatefulWidget {
+
+  @override
   _LogState createState() => _LogState();
 }
 

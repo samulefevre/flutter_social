@@ -3,9 +3,10 @@ import 'package:flutter_social/models/user.dart';
 import 'package:flutter_social/view/my_material.dart';
 
 class FeedPage extends StatefulWidget {
-  User user;
+  final User user;
   FeedPage(this.user);
 
+  @override
   _FeedState createState() => _FeedState();
 }
 

@@ -4,19 +4,20 @@ import 'dart:async';
 import 'package:flutter_social/util/fire_helper.dart';
 import 'package:flutter_social/models/user.dart';
 import 'package:flutter_social/view/page/feed_page.dart';
+import 'package:flutter_social/view/page/new_post_page.dart';
 import 'package:flutter_social/view/page/notif_page.dart';
 import 'package:flutter_social/view/page/profil_page.dart';
 import 'package:flutter_social/view/page/users_page.dart';
 
-
 class MainAppController extends StatefulWidget {
-  String uid;
+  final String uid;
   MainAppController(this.uid);
 
-  _MainAppState createState() => _MainAppState();
+  @override
+  _MainAppControllerState createState() => _MainAppControllerState();
 }
 
-class _MainAppState extends State<MainAppController> {
+class _MainAppControllerState extends State<MainAppController> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   StreamSubscription streamListener;
   User user;
@@ -42,16 +43,17 @@ class _MainAppState extends State<MainAppController> {
     super.dispose();
   }
 
-  write() {}
-
   @override
   Widget build(BuildContext context) {
     return (user == null)
         ? LoadingScaffold()
         : Scaffold(
             body: showPage(),
-            floatingActionButton:
-                FloatingActionButton(onPressed: write(), child: writeIcon, backgroundColor: pointer, ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: write,
+              child: writeIcon,
+              backgroundColor: pointer,
+            ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             key: _globalKey,
@@ -78,6 +80,10 @@ class _MainAppState extends State<MainAppController> {
           );
   }
 
+  write() {
+    _globalKey.currentState.showBottomSheet((builder) => NewPost());
+  }
+
   buttonSelected(int index) {
     print(index);
     setState(() {
@@ -87,10 +93,14 @@ class _MainAppState extends State<MainAppController> {
 
   Widget showPage() {
     switch (index) {
-      case 0: return FeedPage(user);
-      case 1: return UsersPage(user);
-      case 2: return NotifPage(user);
-      default: return ProfilPage(user);
+      case 0:
+        return FeedPage(user);
+      case 1:
+        return UsersPage(user);
+      case 2:
+        return NotifPage(user);
+      default:
+        return ProfilPage(user);
     }
   }
 }
