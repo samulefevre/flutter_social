@@ -12,8 +12,10 @@ class MainAppController extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainAppController> {
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   StreamSubscription streamListener;
   User user;
+  int index = 0;
 
   @override
   void initState() {
@@ -35,8 +37,45 @@ class _MainAppState extends State<MainAppController> {
     super.dispose();
   }
 
+  write() {}
+
   @override
   Widget build(BuildContext context) {
-    return (user == null) ? LoadingScaffold() : Scaffold(body: Center(child: MyText(user.name, color: baseAccent)));
+    return (user == null)
+        ? LoadingScaffold()
+        : Scaffold(
+            body: Center(child: MyText(user.name, color: baseAccent)),
+            floatingActionButton:
+                FloatingActionButton(onPressed: write(), child: writeIcon, backgroundColor: pointer, ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            key: _globalKey,
+            bottomNavigationBar: BottomBar(items: [
+              BarItem(
+                  icon: homeIcon,
+                  onPressed: (() => buttonSelected(0)),
+                  selected: (index == 0)),
+              BarItem(
+                  icon: friendsIcon,
+                  onPressed: (() => buttonSelected(1)),
+                  selected: (index == 1)),
+              Container(width: 0, height: 0),
+              BarItem(
+                  icon: notifIcon,
+                  onPressed: (() => buttonSelected(2)),
+                  selected: (index == 2)),
+              BarItem(
+                  icon: profilIcon,
+                  onPressed: (() => buttonSelected(3)),
+                  selected: (index == 3))
+            ]),
+          );
+  }
+
+  buttonSelected(int index) {
+    print(index);
+    setState(() {
+      this.index = index;
+    });
   }
 }
