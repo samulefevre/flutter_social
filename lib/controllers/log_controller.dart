@@ -4,7 +4,6 @@ import 'package:flutter_social/util/alert_helper.dart';
 import 'package:flutter_social/util/fire_helper.dart';
 
 class LogController extends StatefulWidget {
-
   @override
   _LogState createState() => _LogState();
 }
@@ -102,27 +101,9 @@ class _LogState extends State<LogController> {
           right: 20.0,
         ),
         PaddingWith(
-          widget: Card(
-            elevation: 7.5,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)),
-            child: Container(
-              width: 300.0,
-              height: 50.0,
-              decoration: Mygradient(
-                  startColor: baseAccent,
-                  endColor: base,
-                  radius: 25.0,
-                  horizontal: true),
-              child: FlatButton(
-                onPressed: () {
-                  signIn((index == 0));
-                },
-                child:
-                    MyText((index == 0) ? "Se connecter" : "Créer un compte"),
-              ),
-            ),
-          ),
+          widget: ButtonGradient(
+              callback: () => signIn((index == 0)),
+              text: (index == 0) ? "Se connecter" : "Créer un compte"),
           top: 15.0,
           bottom: 15.0,
         ),
@@ -170,7 +151,8 @@ class _LogState extends State<LogController> {
           if (_name.text != null && _name.text != "") {
             if (_surname.text != null && _surname.text != "") {
               //signIn
-              FireHelper().createAccount(_mail.text, _pwd.text, _name.text, _surname.text);
+              FireHelper().createAccount(
+                  _mail.text, _pwd.text, _name.text, _surname.text);
             } else {
               AlertHelper().error(context, "Aucune prénom");
             }

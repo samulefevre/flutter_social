@@ -11,3 +11,4 @@ export 'my_widgets/my_loading_scaffold.dart';
 export 'my_widgets/loadingCenter.dart';
 export 'my_widgets/bottom_bar.dart';
 export 'my_widgets/bar_item.dart';
+export 'my_widgets/button_gradient.dart';

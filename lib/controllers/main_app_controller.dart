@@ -20,7 +20,6 @@ class MainAppController extends StatefulWidget {
 class _MainAppControllerState extends State<MainAppController> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   StreamSubscription streamListener;
-  User user;
   int index = 0;
 
   @override
@@ -32,7 +31,7 @@ class _MainAppControllerState extends State<MainAppController> {
         .snapshots()
         .listen((document) {
       setState(() {
-        user = User(document);
+        me = User(document);
       });
     });
   }
@@ -45,7 +44,7 @@ class _MainAppControllerState extends State<MainAppController> {
 
   @override
   Widget build(BuildContext context) {
-    return (user == null)
+    return (me == null)
         ? LoadingScaffold()
         : Scaffold(
             body: showPage(),
@@ -94,13 +93,13 @@ class _MainAppControllerState extends State<MainAppController> {
   Widget showPage() {
     switch (index) {
       case 0:
-        return FeedPage(user);
+        return FeedPage();
       case 1:
-        return UsersPage(user);
+        return UsersPage();
       case 2:
-        return NotifPage(user);
+        return NotifPage();
       default:
-        return ProfilPage(user);
+        return ProfilPage();
     }
   }
 }

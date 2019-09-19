@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_social/models/user.dart';
+
+//User global
+User me;
 
 //Colors
 const Color white = const Color(0xFFFFFFFF);
@@ -18,6 +22,10 @@ Icon friendsIcon = Icon(Icons.group);
 Icon notifIcon = Icon(Icons.notifications);
 Icon profilIcon = Icon(Icons.account_circle);
 Icon writeIcon = Icon(Icons.border_color);
+Icon sendIcon = Icon(Icons.send);
+Icon camIcon = Icon(Icons.camera_enhance);
+Icon libraryIcon = Icon(Icons.photo_library);
+
 
 //Keys
 String keyName = "name";
@@ -26,3 +34,9 @@ String keyImageUrl = "imageUrl";
 String keyFollowers = "followers";
 String keyFollowing = "following";
 String keyUid = "uid";
+// keys post
+String keyPostId = "postID";
+String keyText = "text";
+String keyDate = "date";
+String keyLikes = "likes";
+String keyComments = "comments";

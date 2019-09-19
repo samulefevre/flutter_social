@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_social/models/user.dart';
 import 'package:flutter_social/view/my_material.dart';
 
 class NotifPage extends StatefulWidget {
-  final User user;
-  NotifPage(this.user);
-
   @override
   _NotifState createState() => _NotifState();
 }
