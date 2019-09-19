@@ -3,6 +3,11 @@ import 'package:flutter_social/view/my_material.dart';
 import 'dart:async';
 import 'package:flutter_social/util/fire_helper.dart';
 import 'package:flutter_social/models/user.dart';
+import 'package:flutter_social/view/page/feed_page.dart';
+import 'package:flutter_social/view/page/notif_page.dart';
+import 'package:flutter_social/view/page/profil_page.dart';
+import 'package:flutter_social/view/page/users_page.dart';
+
 
 class MainAppController extends StatefulWidget {
   String uid;
@@ -44,12 +49,13 @@ class _MainAppState extends State<MainAppController> {
     return (user == null)
         ? LoadingScaffold()
         : Scaffold(
-            body: Center(child: MyText(user.name, color: baseAccent)),
+            body: showPage(),
             floatingActionButton:
                 FloatingActionButton(onPressed: write(), child: writeIcon, backgroundColor: pointer, ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             key: _globalKey,
+            backgroundColor: base,
             bottomNavigationBar: BottomBar(items: [
               BarItem(
                   icon: homeIcon,
@@ -77,5 +83,14 @@ class _MainAppState extends State<MainAppController> {
     setState(() {
       this.index = index;
     });
+  }
+
+  Widget showPage() {
+    switch (index) {
+      case 0: return FeedPage(user);
+      case 1: return UsersPage(user);
+      case 2: return NotifPage(user);
+      default: return ProfilPage(user);
+    }
   }
 }
