@@ -20,12 +20,13 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _handleAuth() {
-      return StreamBuilder<FirebaseUser>(
-        stream: FirebaseAuth.instance.onAuthStateChanged,
-        builder: (BuildContext context, snapshot) {
-          return (!snapshot.hasData) ? LogController() : MainAppController(snapshot.data.uid);
-        },
-      );
+    return StreamBuilder<FirebaseUser>(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (BuildContext context, snapshot) {
+        return (!snapshot.hasData)
+            ? LogController()
+            : MainAppController(snapshot.data.uid);
+      },
+    );
   }
-
 }

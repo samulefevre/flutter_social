@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social/view/my_material.dart';
 import 'dart:async';
 import 'package:flutter_social/util/fire_helper.dart';
+import 'package:flutter_social/models/user.dart';
 
 class MainAppController extends StatefulWidget {
   String uid;
@@ -11,14 +12,20 @@ class MainAppController extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainAppController> {
-
   StreamSubscription streamListener;
+  User user;
 
   @override
   void initState() {
     super.initState();
-    streamListener = FireHelper().fireUser.document(widget.uid).snapshots().listen((document) {
-      print(document.data);
+    streamListener = FireHelper()
+        .fireUser
+        .document(widget.uid)
+        .snapshots()
+        .listen((document) {
+      setState(() {
+        user = User(document);
+      });
     });
   }
 
@@ -30,6 +37,6 @@ class _MainAppState extends State<MainAppController> {
 
   @override
   Widget build(BuildContext context) {
-    return LoadingScaffold();
+    return (user == null) ? LoadingScaffold() : Scaffold(body: Center(child: MyText(user.name, color: baseAccent)));
   }
 }

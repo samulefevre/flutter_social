@@ -14,7 +14,7 @@ class User {
   User(DocumentSnapshot snapshot) {
     ref = snapshot.reference;
     documentId = snapshot.documentID;
-    Map<String, dynamic> map;
+    Map<String, dynamic> map = snapshot.data;
     uid = map[keyUid];
     name = map[keyName];
     surname = map[keySurname];
