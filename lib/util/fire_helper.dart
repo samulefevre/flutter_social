@@ -42,6 +42,8 @@ class FireHelper {
   static final dataInstance = Firestore.instance;
   final fireUser = dataInstance.collection("users");
 
+  Stream<QuerySnapshot> postsFrom(String uid) => fireUser.document(uid).collection("posts").snapshots();
+
   addUser(String uid, Map<String, dynamic> map) {
     fireUser.document(uid).setData(map);
   }

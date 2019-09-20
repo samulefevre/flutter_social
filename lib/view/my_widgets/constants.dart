@@ -34,6 +34,7 @@ String keyImageUrl = "imageUrl";
 String keyFollowers = "followers";
 String keyFollowing = "following";
 String keyUid = "uid";
+String keyDescription = "description";
 // keys post
 String keyPostId = "postID";
 String keyText = "text";

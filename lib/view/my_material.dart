@@ -12,3 +12,4 @@ export 'my_widgets/loadingCenter.dart';
 export 'my_widgets/bottom_bar.dart';
 export 'my_widgets/bar_item.dart';
 export 'my_widgets/button_gradient.dart';
+export 'my_widgets/profile_image.dart';
