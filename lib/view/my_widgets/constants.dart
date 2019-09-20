@@ -25,6 +25,9 @@ Icon writeIcon = Icon(Icons.border_color);
 Icon sendIcon = Icon(Icons.send);
 Icon camIcon = Icon(Icons.camera_enhance);
 Icon libraryIcon = Icon(Icons.photo_library);
+Icon likeEmptyIcon = Icon(Icons.favorite_border);
+Icon likeFullIcon = Icon(Icons.favorite);
+Icon msgIcon = Icon(Icons.message);
 
 
 //Keys

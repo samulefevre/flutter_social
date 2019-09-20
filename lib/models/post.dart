@@ -1,4 +1,3 @@
-import 'user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_social/view/my_widgets/constants.dart';
 
@@ -12,17 +11,15 @@ class Post {
   int date;
   List<dynamic> likes;
   List<dynamic> comments;
-  User user;
 
-  Post(User user, DocumentSnapshot snapshot) {
+  Post(DocumentSnapshot snapshot) {
     ref = snapshot.reference;
     documentId = snapshot.documentID;
-    user = user;
     Map<String, dynamic> map = snapshot.data;
     id = map[keyPostId];
     text = map[keyText];
     userId = map[keyUid];
-    imageUrl = map[imageUrl];
+    imageUrl = map[keyImageUrl];
     date = map[keyDate];
     likes = map[keyLikes];
     comments = map[keyComments];

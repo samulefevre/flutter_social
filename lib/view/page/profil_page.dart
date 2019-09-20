@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_social/models/post.dart';
 import 'package:flutter_social/models/user.dart';
 import 'package:flutter_social/view/my_material.dart';
 import 'package:flutter_social/util/fire_helper.dart';
 import 'package:flutter_social/delegate/header_delegate.dart';
+import 'package:flutter_social/view/tiles/postTile.dart';
 
 class ProfilPage extends StatefulWidget {
   final User user;
@@ -55,29 +57,33 @@ class _ProfilState extends State<ProfilPage> {
                 expandedHeight: expanded,
                 actions: <Widget>[],
                 flexibleSpace: FlexibleSpaceBar(
-                  title: _showTitle ? MyText(widget.user.surname + " " + widget.user.name ) : MyText(""),
+                  title: _showTitle
+                      ? MyText(widget.user.surname + " " + widget.user.name)
+                      : MyText(""),
                   background: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: profileImage, fit: BoxFit.cover)),
-                    child: Center(
-                        child: ProfileImage(
-                            urlString: widget.user.imageUrl,
-                            size: 75.0,
-                            onPressed: null)),
-                  ),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: profileImage, fit: BoxFit.cover)),
+                      child: Center(
+                          child: ProfileImage(
+                              urlString: widget.user.imageUrl,
+                              size: 75.0,
+                              onPressed: null))),
                 ),
               ),
               SliverPersistentHeader(
-                pinned: true,
-                delegate: HeaderDelegate(
-                    user: widget.user, callback: () {}, scrolled: _showTitle),
-              ),
+                  pinned: true,
+                  delegate: HeaderDelegate(
+                      user: widget.user,
+                      callback: () {},
+                      scrolled: _showTitle)),
               SliverList(delegate:
                   SliverChildBuilderDelegate((BuildContext context, index) {
-                return ListTile(
-                  title: MyText("Nouvelle tile: $index}"),
-                );
+                if (index == documents.length)
+                  return ListTile(title: MyText("Fin de liste"));
+                if (index > documents.length) return null;
+                Post post = Post(documents[index]);
+                return PostTile(post: post, user: widget.user);
               }))
             ],
           );
