@@ -78,16 +78,19 @@ class PostTile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 1.0,
                 color: baseAccent,
-              
               )),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                IconButton(icon: (post.likes.contains(me.uid) ? likeFullIcon : likeEmptyIcon), onPressed: null),
-                MyText(post.likes.length.toString(), color: baseAccent),
-                IconButton(icon: msgIcon, onPressed: null),
-                MyText(post.comments.length.toString(), color: baseAccent)
-              ])
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    IconButton(
+                        icon: (post.likes.contains(me.uid)
+                            ? likeFullIcon
+                            : likeEmptyIcon),
+                        onPressed: null),
+                    MyText(post.likes.length.toString(), color: baseAccent),
+                    IconButton(icon: msgIcon, onPressed: null),
+                    MyText(post.comments.length.toString(), color: baseAccent)
+                  ])
             ],
           ),
         ),
