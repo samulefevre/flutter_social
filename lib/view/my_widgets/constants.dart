@@ -28,7 +28,7 @@ Icon libraryIcon = Icon(Icons.photo_library);
 Icon likeEmptyIcon = Icon(Icons.favorite_border);
 Icon likeFullIcon = Icon(Icons.favorite);
 Icon msgIcon = Icon(Icons.message);
-
+Icon settingsIcon = Icon(Icons.settings);
 
 //Keys
 String keyName = "name";

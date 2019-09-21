@@ -42,10 +42,23 @@ class FireHelper {
   static final dataInstance = Firestore.instance;
   final fireUser = dataInstance.collection("users");
 
-  Stream<QuerySnapshot> postsFrom(String uid) => fireUser.document(uid).collection("posts").snapshots();
+  Stream<QuerySnapshot> postsFrom(String uid) =>
+      fireUser.document(uid).collection("posts").snapshots();
 
   addUser(String uid, Map<String, dynamic> map) {
     fireUser.document(uid).setData(map);
+  }
+
+  modifyUser(Map<String, dynamic> data) {
+    fireUser.document(me.uid).updateData(data);
+  }
+
+  modifyPicture(File file) {
+    StorageReference ref = storageUser.child(me.uid);
+    addImage(file, ref).then((finalised) {
+      Map<String, dynamic> data = {keyImageUrl: finalised};
+      modifyUser(data);
+    });
   }
 
   addPost(String uid, String text, File file) {

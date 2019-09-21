@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_social/view/my_material.dart';
 
 import 'controllers/main_app_controller.dart';
 import 'controllers/log_controller.dart';
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.grey,
+          canvasColor: Colors.transparent,
+          primaryColor: base,
+          accentColor: baseAccent),
       home: _handleAuth(),
     );
   }
