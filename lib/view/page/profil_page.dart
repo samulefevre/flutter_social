@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_social/view/tiles/postTile.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilPage extends StatefulWidget {
-  final User user;
+  User user;
   ProfilPage(this.user);
 
   @override
@@ -31,6 +32,8 @@ class _ProfilState extends State<ProfilPage> {
         controller.offset > expanded - kToolbarHeight;
   }
 
+  StreamSubscription subscription;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +45,15 @@ class _ProfilState extends State<ProfilPage> {
     _name = TextEditingController();
     _surname = TextEditingController();
     _desc = TextEditingController();
+    subscription = FireHelper()
+        .fireUser
+        .document(widget.user.uid)
+        .snapshots()
+        .listen((data) {
+      setState(() {
+        widget.user = User(data);
+      });
+    });
   }
 
   @override
@@ -50,6 +62,7 @@ class _ProfilState extends State<ProfilPage> {
     _name.dispose();
     _surname.dispose();
     _desc.dispose();
+    subscription.cancel();
     super.dispose();
   }
 
@@ -74,7 +87,7 @@ class _ProfilState extends State<ProfilPage> {
                           icon: settingsIcon,
                           color: pointer,
                           onPressed: () => AlertHelper().disconnect(context))
-                      : MyText("suivre ou ne plus suivre")
+                      : FollowButton(user: widget.user)
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                   title: _showTitle
@@ -118,46 +131,49 @@ class _ProfilState extends State<ProfilPage> {
   }
 
   void changeUser() {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext ctx) {
-          return Container(
-            color: Colors.transparent,
-            child: Card(
-                elevation: 5.0,
-                margin: EdgeInsets.all(7.5),
-                child: Container(
-                    color: base,
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        MyText("Modification de la photo de profil"),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            IconButton(
-                                icon: camIcon,
-                                onPressed: () {
-                                  takePicture(ImageSource.camera);
-                                  Navigator.pop(ctx);
-                                }),
-                            IconButton(
-                                icon: libraryIcon,
-                                onPressed: () {
-                                  takePicture(ImageSource.gallery);
-                                  Navigator.pop(ctx);
-                                }),
-                          ],
-                        )
-                      ],
-                    ))),
-          );
-        });
+    if (widget.user.uid == me.uid) {
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext ctx) {
+            return Container(
+              color: Colors.transparent,
+              child: Card(
+                  elevation: 5.0,
+                  margin: EdgeInsets.all(7.5),
+                  child: Container(
+                      color: base,
+                      padding: EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          MyText("Modification de la photo de profil"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              IconButton(
+                                  icon: camIcon,
+                                  onPressed: () {
+                                    takePicture(ImageSource.camera);
+                                    Navigator.pop(ctx);
+                                  }),
+                              IconButton(
+                                  icon: libraryIcon,
+                                  onPressed: () {
+                                    takePicture(ImageSource.gallery);
+                                    Navigator.pop(ctx);
+                                  }),
+                            ],
+                          )
+                        ],
+                      ))),
+            );
+          });
+    }
   }
 
   Future<void> takePicture(ImageSource source) async {
-    File file = await ImagePicker.pickImage(source: source);
+    File file = await ImagePicker.pickImage(
+        source: source, maxHeight: 500.0, maxWidth: 500.0);
     FireHelper().modifyPicture(file);
   }
 
