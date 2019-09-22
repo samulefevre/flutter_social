@@ -10,9 +10,9 @@ class PostTile extends StatelessWidget {
   final bool detail;
 
   PostTile(
-      {@required Post this.post,
-      @required User this.user,
-      bool this.detail: false});
+      {@required this.post,
+      @required this.user,
+      this.detail: false});
 
   @override
   Widget build(BuildContext context) {
