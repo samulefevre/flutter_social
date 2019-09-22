@@ -20,14 +20,7 @@ class _UsersState extends State<UsersPage> {
             return NestedScrollView(
               headerSliverBuilder: (BuildContext build, bool scrolled) {
                 return [
-                  SliverAppBar(
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      title: MyText("Liste d'utilisateurs", color: baseAccent),
-                      background: Image(image: eventImage, fit: BoxFit.cover),
-                    ),
-                    expandedHeight: 150.0,
-                  )
+                  MyAppBar(title: "Liste des utilisateurs", image: eventImage)
                 ];
               },
               body: ListView.builder(

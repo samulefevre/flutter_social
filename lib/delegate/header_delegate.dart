@@ -46,10 +46,10 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               InkWell(
-                child: MyText("Followers: ${user.followers.length}"),
+                child: MyText("Followers: ${user.followers.length - 1}"),
               ),
               InkWell(
-                child: MyText("Following: ${user.following.length - 1}"),
+                child: MyText("Following: ${user.following.length}"),
               )
             ],
           )

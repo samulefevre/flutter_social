@@ -23,8 +23,8 @@ class FireHelper {
         (await _auth.createUserWithEmailAndPassword(email: mail, password: pwd))
             .user;
     String uid = user.uid;
-    List<dynamic> followers = [];
-    List<dynamic> following = [uid];
+    List<dynamic> followers = [uid];
+    List<dynamic> following = [];
     Map<String, dynamic> map = {
       keyName: name,
       keySurname: surname,
@@ -68,7 +68,7 @@ class FireHelper {
       other.ref.updateData({keyFollowers: FieldValue.arrayRemove([me.uid])});
     } else {
       me.ref.updateData({keyFollowing: FieldValue.arrayUnion([other.uid])});
-      other.ref.updateData({keyFollowers: FieldValue.arrayRemove([me.uid])});
+      other.ref.updateData({keyFollowers: FieldValue.arrayUnion([me.uid])});
     }
   }
 
