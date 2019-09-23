@@ -6,7 +6,7 @@ import 'package:flutter_social/view/my_material.dart';
 import 'package:flutter_social/models/comment.dart';
 
 class CommentTile extends StatelessWidget {
-  Comment comment;
+  final Comment comment;
 
   CommentTile(this.comment);
 

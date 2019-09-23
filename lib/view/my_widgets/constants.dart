@@ -44,3 +44,6 @@ String keyText = "text";
 String keyDate = "date";
 String keyLikes = "likes";
 String keyComments = "comments";
+String keyType = "type";
+String keyRef = "ref";
+String keySeen = "seen";
