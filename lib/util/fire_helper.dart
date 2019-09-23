@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_social/models/post.dart';
 import 'package:flutter_social/models/user.dart';
 import 'package:flutter_social/view/my_material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -63,12 +64,32 @@ class FireHelper {
   }
 
   addFollow(User other) {
-    if(me.following.contains(other.uid)) {
-      me.ref.updateData({keyFollowing: FieldValue.arrayRemove([other.uid])});
-      other.ref.updateData({keyFollowers: FieldValue.arrayRemove([me.uid])});
+    if (me.following.contains(other.uid)) {
+      me.ref.updateData({
+        keyFollowing: FieldValue.arrayRemove([other.uid])
+      });
+      other.ref.updateData({
+        keyFollowers: FieldValue.arrayRemove([me.uid])
+      });
     } else {
-      me.ref.updateData({keyFollowing: FieldValue.arrayUnion([other.uid])});
-      other.ref.updateData({keyFollowers: FieldValue.arrayUnion([me.uid])});
+      me.ref.updateData({
+        keyFollowing: FieldValue.arrayUnion([other.uid])
+      });
+      other.ref.updateData({
+        keyFollowers: FieldValue.arrayUnion([me.uid])
+      });
+    }
+  }
+
+  addLike(Post post) {
+    if (post.likes.contains(me.uid)) {
+      post.ref.updateData({
+        keyLikes: FieldValue.arrayRemove([me.uid])
+      });
+    } else {
+      post.ref.updateData({
+        keyLikes: FieldValue.arrayUnion([me.uid])
+      });
     }
   }
 
@@ -93,6 +114,17 @@ class FireHelper {
     } else {
       fireUser.document(uid).collection("posts").document().setData(map);
     }
+  }
+
+  addComment(DocumentReference ref, String text) {
+    Map<dynamic, dynamic> map = {
+      keyUid: me.uid,
+      keyText: text,
+      keyDate: DateTime.now().millisecondsSinceEpoch.toInt()
+    };
+    ref.updateData({
+      keyComments: FieldValue.arrayUnion([map])
+    });
   }
 
   //Storage
